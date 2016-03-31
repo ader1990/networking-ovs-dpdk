@@ -316,7 +316,8 @@ add_bridges() {
 bind_nic_2_ovsdriver() {
     # Check argument is supplied.
     if [[ -z "$1" ]]; then
-        die 5 $LINENO "No argument supplied, PCI_ARRAY[@] expected"
+        echo "PCI_MAPPINGS is empty. No argument supplied, PCI_ARRAY[@] expected"
+        return 0
     fi
 
     list=("$@")
