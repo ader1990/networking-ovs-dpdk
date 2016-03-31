@@ -397,7 +397,7 @@ function install_qemu_kvm {
         echo "Configuring libvirt for CentOS"
         sudo service libvirtd stop
 
-        sudo yum remove -y libvirt* qemu* libcacard* glusterfs*
+        sudo yum remove -y qemu* libcacard* glusterfs*
 
         if [ ! -d /opt/stack/rpms ]; then
             sudo mkdir -m 777 -p /opt/stack/rpms
@@ -411,10 +411,6 @@ function install_qemu_kvm {
             sudo rm -f $RPMS/*
             wget_cmd=" wget -P"
         fi
-
-        for file in ${CentOS_libvirt_repo[@]} ; do
-            $wget_cmd $RPMS $file
-        done
 
         for file in ${CentOS_qemu_repo[@]} ; do
             $wget_cmd $RPMS $file
