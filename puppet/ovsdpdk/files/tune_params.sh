@@ -16,7 +16,7 @@ if [ $OVS_SOCKET_MEM == "auto" ] ; then
     done
 fi
 
-sudo sed "s#OVS_SOCKET_MEM=.*#OVS_SOCKET_MEM=$OVS_SOCKET_MEM#" -i /etc/default/ovs-dpdk
+#sudo sed "s#OVS_SOCKET_MEM=.*#OVS_SOCKET_MEM=$OVS_SOCKET_MEM#" -i /etc/default/ovs-dpdk
 
 # Creates an array of pci addres to interface names delimeted by # e.g. <pci_address>#<interface name>
 PAIRS=( `ls -al /sys/class/net/* | grep pci | rev | awk '{print $1;}' | cut -d '/' -f 1,3 | rev |  sed s'/\//#/'` )
@@ -57,9 +57,9 @@ for net in "${ARRAY[@]}"; do
         fi
     done
 done
-sudo sed "s/OVS_PCI_MAPPINGS=.*/OVS_PCI_MAPPINGS=$NICS/" -i /etc/default/ovs-dpdk
-sudo sed "s/OVS_BRIDGE_MAPPINGS=.*/OVS_BRIDGE_MAPPINGS=$OVS_BRIDGE_MAPPINGS/" -i /etc/default/ovs-dpdk
-sudo sed "s/OVS_DPDK_PORT_MAPPINGS=.*/OVS_DPDK_PORT_MAPPINGS=$OVS_DPDK_PORT_MAPPINGS/" -i /etc/default/ovs-dpdk
+#sudo sed "s/OVS_PCI_MAPPINGS=.*/OVS_PCI_MAPPINGS=$NICS/" -i /etc/default/ovs-dpdk
+#sudo sed "s/OVS_BRIDGE_MAPPINGS=.*/OVS_BRIDGE_MAPPINGS=$OVS_BRIDGE_MAPPINGS/" -i /etc/default/ovs-dpdk
+#sudo sed "s/OVS_DPDK_PORT_MAPPINGS=.*/OVS_DPDK_PORT_MAPPINGS=$OVS_DPDK_PORT_MAPPINGS/" -i /etc/default/ovs-dpdk
 
 OVS_PMD_CORE_MASK=$(echo $OVS_PMD_CORE_MASK | sed 's/^0x//')
 
@@ -83,4 +83,4 @@ if [ $OVS_PMD_CORE_MASK -eq 4 ]; then
     OVS_PMD_CORE_MASK=`printf "%x" $RESULT`
 fi
 
-sudo sed "s#OVS_PMD_CORE_MASK=.*#OVS_PMD_CORE_MASK=$OVS_PMD_CORE_MASK#" -i /etc/default/ovs-dpdk
+#sudo sed "s#OVS_PMD_CORE_MASK=.*#OVS_PMD_CORE_MASK=$OVS_PMD_CORE_MASK#" -i /etc/default/ovs-dpdk
