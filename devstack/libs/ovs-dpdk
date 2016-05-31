@@ -418,7 +418,9 @@ function install_qemu_kvm {
 
         sudo yum install -y $RPMS/*
 
-        sudo service libvirtd start
+        
+        sudo yum install -y libvirt-daemon-driver-qemu  libvirt-daemon-driver-storage
+        sudo service libvirtd restart
     else
         install_package qemu-kvm
     fi
